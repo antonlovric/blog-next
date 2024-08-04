@@ -19,5 +19,7 @@ export class RedisService {
 const redis = new RedisService();
 export const redisClient = redis.client;
 
+redisClient?.on('error', (e) => console.error(e));
+
 process.on('SIGINT', () => redisClient?.disconnect());
 process.on('SIGTERM', () => redisClient?.disconnect());
