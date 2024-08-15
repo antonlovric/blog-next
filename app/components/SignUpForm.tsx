@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import LoadingWrapper from './UI/LoadingWrapper';
 
 export interface IUserSignUpForm {
   firstName: string;
@@ -9,7 +10,7 @@ export interface IUserSignUpForm {
 }
 
 interface ISignUpForm {
-  handleSignUp: (user: IUserSignUpForm) => void;
+  handleSignUp: (user: IUserSignUpForm) => Promise<void>;
 }
 
 const SignUpForm = ({ handleSignUp }: ISignUpForm) => {
@@ -19,6 +20,7 @@ const SignUpForm = ({ handleSignUp }: ISignUpForm) => {
     lastName: '',
     password: '',
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleUpdateForm(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -35,56 +37,65 @@ const SignUpForm = ({ handleSignUp }: ISignUpForm) => {
     }
   }
 
-  function submitUser() {
-    handleSignUp(formValues);
+  async function submitUser() {
+    try {
+      setIsLoading(true);
+      await handleSignUp(formValues);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
-    <form action={submitUser} className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1 align-center">
-        <label htmlFor="firstName">First name</label>
-        <input
-          onChange={handleUpdateForm}
-          type="text"
-          id="firstName"
-          value={formValues.firstName}
-          className="text-white bg-dark-gray rounded-md py-2 px-4 w-full border border-light-gray"
-        />
-      </div>
-      <div className="flex flex-col gap-1 align-center">
-        <label htmlFor="lastName">Last name</label>
-        <input
-          onChange={handleUpdateForm}
-          type="text"
-          id="lastName"
-          value={formValues.lastName}
-          className="text-white bg-dark-gray rounded-md py-2 px-4 w-full border border-light-gray"
-        />
-      </div>
-      <div className="flex flex-col gap-1 align-center">
-        <label htmlFor="email">Email</label>
-        <input
-          onChange={handleUpdateForm}
-          type="email"
-          id="email"
-          value={formValues.email}
-          className="text-white bg-dark-gray rounded-md py-2 px-4 w-full border border-light-gray"
-        />
-      </div>
-      <div className="flex flex-col gap-1 align-center">
-        <label htmlFor="password">Password</label>
-        <input
-          onChange={handleUpdateForm}
-          type="password"
-          id="password"
-          value={formValues.password}
-          className="text-white bg-dark-gray rounded-md py-2 px-4 w-full border border-light-gray"
-        />
-      </div>
-      <button type="submit" className="button-primary mt-2">
-        Sign Up
-      </button>
-    </form>
+    <LoadingWrapper isLoading={isLoading}>
+      <form action={submitUser} className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1 align-center">
+          <label htmlFor="firstName">First name</label>
+          <input
+            onChange={handleUpdateForm}
+            type="text"
+            id="firstName"
+            value={formValues.firstName}
+            className="text-white bg-dark-gray rounded-md py-2 px-4 w-full border border-light-gray"
+          />
+        </div>
+        <div className="flex flex-col gap-1 align-center">
+          <label htmlFor="lastName">Last name</label>
+          <input
+            onChange={handleUpdateForm}
+            type="text"
+            id="lastName"
+            value={formValues.lastName}
+            className="text-white bg-dark-gray rounded-md py-2 px-4 w-full border border-light-gray"
+          />
+        </div>
+        <div className="flex flex-col gap-1 align-center">
+          <label htmlFor="email">Email</label>
+          <input
+            onChange={handleUpdateForm}
+            type="email"
+            id="email"
+            value={formValues.email}
+            className="text-white bg-dark-gray rounded-md py-2 px-4 w-full border border-light-gray"
+          />
+        </div>
+        <div className="flex flex-col gap-1 align-center">
+          <label htmlFor="password">Password</label>
+          <input
+            onChange={handleUpdateForm}
+            type="password"
+            id="password"
+            value={formValues.password}
+            className="text-white bg-dark-gray rounded-md py-2 px-4 w-full border border-light-gray"
+          />
+        </div>
+        <button type="submit" className="button-primary mt-2">
+          Sign Up
+        </button>
+      </form>
+    </LoadingWrapper>
   );
 };
 

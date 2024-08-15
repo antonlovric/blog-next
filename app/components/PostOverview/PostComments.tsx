@@ -67,17 +67,6 @@ const PostComments = (props: IPostComments) => {
                   {comment.users?.first_name} {comment.users?.last_name}
                 </p>
                 <p className="mt-1">{comment.comment}</p>
-                <div className="flex items-center gap-4 mt-1">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined">thumb_up</span>
-                    <span>0</span>
-                    <span className="material-symbols-outlined">
-                      thumb_down
-                    </span>
-                  </div>
-                  <div>reply</div>
-                  <div>share</div>
-                </div>
               </div>
             </div>
           ))}
