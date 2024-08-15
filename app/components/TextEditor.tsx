@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import CharacterCount from '@tiptap/extension-character-count';
 import BodyEditor from './CreatePost/BodyEditor';
 import { Image as CustomTiptapImage } from '@/app/helpers/tiptap';
+import { uploadImage } from '../helpers/s3';
 
 interface ITextEditor {
   categories?: categories[];

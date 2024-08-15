@@ -44,11 +44,17 @@ const ProfileIcon = ({ profileImage, logout, user }: IProfileIcon) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
-        <img
-          src={user?.profile_image || '/mirkec.png'}
-          className="rounded-full object-cover h-[40px] w-[40px] cursor-pointer"
-          alt="profile image"
-        />
+        {user?.profile_image ? (
+          <img
+            src={user?.profile_image}
+            className="rounded-full object-cover h-[40px] w-[40px] cursor-pointer"
+            alt="profile image"
+          />
+        ) : (
+          <div className="flex items-center justify-center rounded-full h-[40px] w-[40px] bg-gray-500">
+            <span className="material-symbols-outlined">person</span>
+          </div>
+        )}
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content className="mr-5 mt-1 bg-dark-gray p-2 rounded-md">
