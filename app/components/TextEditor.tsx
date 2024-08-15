@@ -10,6 +10,7 @@ import CharacterCount from '@tiptap/extension-character-count';
 import BodyEditor from './CreatePost/BodyEditor';
 import { Image as CustomTiptapImage } from '@/app/helpers/tiptap';
 import { uploadImage } from '../helpers/s3';
+import LoadingWrapper from './UI/LoadingWrapper';
 
 interface ITextEditor {
   categories?: categories[];
@@ -19,6 +20,7 @@ interface ITextEditor {
 const TextEditor = ({ categories, createPost }: ITextEditor) => {
   const [coverImage, setCoverImage] = useState('');
   const [file, setFile] = useState<File | null>(null);
+  const [isCreating, setIsCreating] = useState(false);
   const router = useRouter();
   const titleEditor = useEditor({
     extensions: [StarterKit, CharacterCount.configure({ limit: 100 })],
@@ -50,9 +52,9 @@ const TextEditor = ({ categories, createPost }: ITextEditor) => {
   }, []);
 
   const handleSubmit = async () => {
-    const imagePath = file ? await uploadImage(file) : '';
-
     try {
+      setIsCreating(true);
+      const imagePath = file ? await uploadImage(file) : '';
       shouldDeleteImages.current = false;
 
       await createPost({
@@ -62,11 +64,12 @@ const TextEditor = ({ categories, createPost }: ITextEditor) => {
         title: titleEditor?.getHTML() || '',
         coverImagePath: imagePath,
       });
+      router.replace('/');
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsCreating(false);
     }
-
-    router.replace('/');
   };
 
   function selectCategory(id: number) {
@@ -179,7 +182,7 @@ const TextEditor = ({ categories, createPost }: ITextEditor) => {
       />
       <div className="mt-5">
         <button onClick={handleSubmit} className="button-primary">
-          Submit
+          <LoadingWrapper isLoading={isCreating}>Submit</LoadingWrapper>
         </button>
       </div>
     </main>
