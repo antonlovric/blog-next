@@ -20,8 +20,26 @@ export async function POST(request: Request) {
       Expires: 600, // Seconds before the presigned post expires. 3600 by default.
     });
 
-    return Response.json({ url, fields });
+    return Response.json(
+      { url, fields },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        },
+      }
+    );
   } catch (error) {
-    return Response.json({ error: error.message });
+    return Response.json(
+      { error: error.message },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        },
+      }
+    );
   }
 }

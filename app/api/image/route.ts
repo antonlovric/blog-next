@@ -16,9 +16,27 @@ export async function DELETE(request: Request) {
       `Successfully deleted ${Deleted?.length} objects from S3 bucket. Deleted objects:`
     );
     console.log(Deleted?.map((d) => ` • ${d.Key}`).join('\n'));
-    return Response.json({ data: Deleted });
+    return Response.json(
+      { data: Deleted },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        },
+      }
+    );
   } catch (err) {
     console.error(err);
-    return Response.json({ error: err?.message });
+    return Response.json(
+      { error: err?.message },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        },
+      }
+    );
   }
 }
