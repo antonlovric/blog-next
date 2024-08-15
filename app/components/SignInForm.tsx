@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import LoadingWrapper from './UI/LoadingWrapper';
 
 export interface IUserSignInForm {
   email: string;
@@ -64,8 +63,12 @@ const SignInForm = ({ handleSignIn, errorMessage }: ISignInForm) => {
         />
       </div>
       {errorMessage ? 'Invalid credentials' : ''}
-      <button type="submit" className="button-primary mt-2">
-        <LoadingWrapper isLoading={isLoading}>Sign In</LoadingWrapper>
+      <button
+        disabled={isLoading}
+        type="submit"
+        className="button-primary mt-2"
+      >
+        {isLoading ? 'Loading' : 'Sign in'}
       </button>
     </form>
   );

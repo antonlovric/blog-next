@@ -34,15 +34,6 @@ model post_categories {
   @@index([posts_id], map: "fki_fk_post_categories_posts1")
 }
 
-model post_tags {
-  posts_id Int
-  tags_id  Int
-  posts    posts @relation(fields: [posts_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_post_tags_posts1")
-  tags     tags  @relation(fields: [tags_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_post_tags_tags1")
-
-  @@id([posts_id, tags_id])
-}
-
 model posts {
   id              Int               @id @default(autoincrement())
   title           String?           @db.VarChar(100)
@@ -54,15 +45,8 @@ model posts {
   edited_at       DateTime?         @default(now()) @db.Date
   comments        comments[]
   post_categories post_categories[]
-  post_tags       post_tags[]
   post_votes      post_votes[]
   author          users             @relation("posts_users_idTousers", fields: [users_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_posts_users")
-}
-
-model tags {
-  id        Int         @id @default(autoincrement())
-  label     String?     @db.VarChar(45)
-  post_tags post_tags[]
 }
 
 model users {

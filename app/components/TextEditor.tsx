@@ -10,7 +10,6 @@ import CharacterCount from '@tiptap/extension-character-count';
 import BodyEditor from './CreatePost/BodyEditor';
 import { Image as CustomTiptapImage } from '@/app/helpers/tiptap';
 import { uploadImage } from '../helpers/s3';
-import LoadingWrapper from './UI/LoadingWrapper';
 
 interface ITextEditor {
   categories?: categories[];
@@ -181,8 +180,12 @@ const TextEditor = ({ categories, createPost }: ITextEditor) => {
         updateUploadedImagesList={(key) => uploadedImageKeys.current.push(key)}
       />
       <div className="mt-5">
-        <button onClick={handleSubmit} className="button-primary">
-          <LoadingWrapper isLoading={isCreating}>Submit</LoadingWrapper>
+        <button
+          disabled={isCreating}
+          onClick={handleSubmit}
+          className="button-primary"
+        >
+          {isCreating ? 'Loading' : 'Submit'}
         </button>
       </div>
     </main>

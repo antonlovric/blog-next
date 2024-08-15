@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import LoadingWrapper from './UI/LoadingWrapper';
 
 export interface IUserSignUpForm {
   firstName: string;
@@ -90,8 +89,12 @@ const SignUpForm = ({ handleSignUp }: ISignUpForm) => {
           className="text-white bg-dark-gray rounded-md py-2 px-4 w-full border border-light-gray"
         />
       </div>
-      <button type="submit" className="button-primary mt-2">
-        <LoadingWrapper isLoading={isLoading}>Sign Up</LoadingWrapper>
+      <button
+        disabled={isLoading}
+        type="submit"
+        className="button-primary mt-2"
+      >
+        {isLoading ? 'Loading' : 'Sign up'}
       </button>
     </form>
   );
