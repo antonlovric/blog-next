@@ -17,14 +17,17 @@ export function incrementPostVisitCount(postId: number) {
   redisClient?.sAdd('post_ids', postId.toString());
   redisClient?.incr(`post:${postId}:visit`);
 }
+
 export function incrementPostLikeCount(postId: number) {
   redisClient?.sAdd('post_ids', postId.toString());
   redisClient?.incr(`post:${postId}:like`);
 }
+
 export function incrementPostCommentCount(postId: number) {
   redisClient?.sAdd('post_ids', postId.toString());
   redisClient?.incr(`post:${postId}:comment`);
 }
+
 export function incrementPostShareCount(postId: number) {
   redisClient?.sAdd('post_ids', postId.toString());
   redisClient?.incr(`post:${postId}:share`);
