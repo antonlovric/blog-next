@@ -3,12 +3,11 @@
 import { Editor, EditorContent } from '@tiptap/react';
 import React, { useState } from 'react';
 import TextEditorButton from './TextEditorButton';
-import ActionDropdown from '../UI/ActionDropdown';
 import { uploadImage } from '@/app/helpers/s3';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 interface IBodyEditor {
   editor: Editor | null;
-  deleteImages?: (imageIds: string[]) => Promise<void>;
   updateUploadedImagesList?: (imageKey: string) => void;
 }
 
@@ -28,10 +27,7 @@ const BodyEditor = (props: IBodyEditor) => {
     props.editor?.chain().focus().toggleStrike().run();
   }
 
-  function handleFontTypeChange(
-    e: React.MouseEvent<HTMLSpanElement, MouseEvent>
-  ) {
-    const fontType = e.currentTarget.getAttribute('data-font-type');
+  function handleFontTypeChange(fontType: string) {
     if (fontType === 'h1') {
       props.editor?.chain().focus().toggleHeading({ level: 1 }).run();
       setActiveFontType('Heading 1');
@@ -85,26 +81,42 @@ const BodyEditor = (props: IBodyEditor) => {
   return (
     <div className="flex flex-col gap-2 mt-4">
       <div className="flex items-center gap-2">
-        <button
-          onClick={() => setIsFontDropdownVisible(!isFontDropdownVisible)}
-          className="relative"
-        >
-          <span>{activeFontType}</span>
-          <ActionDropdown isVisible={isFontDropdownVisible}>
-            <span data-font-type="h1" onClick={handleFontTypeChange}>
-              Heading 1
-            </span>
-            <span data-font-type="h2" onClick={handleFontTypeChange}>
-              Heading 2
-            </span>
-            <span data-font-type="h3" onClick={handleFontTypeChange}>
-              Heading 3
-            </span>
-            <span data-font-type="p" onClick={handleFontTypeChange}>
-              Paragraph
-            </span>
-          </ActionDropdown>
-        </button>
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger
+            onClick={() => setIsFontDropdownVisible(!isFontDropdownVisible)}
+            className="relative bg-dark-gray px-2 py-2 border border-light-gray rounded-md"
+          >
+            <span>{activeFontType}</span>
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Portal>
+            <DropdownMenu.Content>
+              <DropdownMenu.Item
+                className="bg-dark-gray w-full p-2"
+                onSelect={() => handleFontTypeChange('h1')}
+              >
+                <span>Heading 1</span>
+              </DropdownMenu.Item>
+              <DropdownMenu.Item
+                className="bg-dark-gray w-full p-2"
+                onSelect={() => handleFontTypeChange('h2')}
+              >
+                <span>Heading 2</span>
+              </DropdownMenu.Item>
+              <DropdownMenu.Item
+                className="bg-dark-gray w-full p-2"
+                onSelect={() => handleFontTypeChange('h3')}
+              >
+                <span>Heading 3</span>
+              </DropdownMenu.Item>
+              <DropdownMenu.Item
+                className="bg-dark-gray w-full p-2"
+                onSelect={() => handleFontTypeChange('p')}
+              >
+                <span>Paragraph</span>
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu.Portal>
+        </DropdownMenu.Root>
         <div className="flex items-center gap-2 pr-2 border-r border-r-white border-solid">
           <TextEditorButton
             onClick={toggleBold}

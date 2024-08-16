@@ -26,7 +26,7 @@ interface IPostCard {
 
 const PostCard = ({ post, isEditable }: IPostCard) => {
   const [isDeletePending, setDeleteTransition] = useTransition();
-  const { refresh } = useRouter();
+  const { refresh, push } = useRouter();
   const titleEditor = useEditor({
     editable: false,
     content: post.title,
@@ -54,7 +54,10 @@ const PostCard = ({ post, isEditable }: IPostCard) => {
     });
   }
 
-  function editPost() {}
+  function editPost(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.stopPropagation();
+    push(`/edit-post/${post.id}`);
+  }
 
   return (
     <div className="bg-dark-gray  rounded-md p-2 cursor-pointer h-full flex flex-col justify-between relative">

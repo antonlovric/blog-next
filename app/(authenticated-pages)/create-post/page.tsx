@@ -54,7 +54,7 @@ const CreatePost = async () => {
 
   return (
     <div>
-      <TextEditor categories={categories} createPost={handleCreate} />
+      <TextEditor categories={categories} />
     </div>
   );
 };
