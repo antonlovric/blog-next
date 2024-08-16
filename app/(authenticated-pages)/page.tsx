@@ -56,12 +56,12 @@ export default async function Home() {
       </h1>
       <main>{relevantPost ? <FeaturedPost post={relevantPost} /> : <></>}</main>
       {filteredPostCategories.map((category) => (
-        <section
-          className="flex flex-col gap-2 mt-6 [&:not(:last-child)]:border-b-4 border-blog-blue pb-4"
-          key={category.id}
-        >
-          <div className="flex items-center justify-between">
-            <p>Latest {category.name} news</p>
+        <section className="flex flex-col gap-2 mt-6 pb-4" key={category.id}>
+          <div className="flex items-center justify-between gap-6">
+            <div className="flex items-center justify-between gap-6 w-full">
+              <p className="whitespace-nowrap">Latest {category.name} news</p>
+              <div className="h-[1px] bg-blog-blue w-full"></div>
+            </div>
             <Link href={`/posts?categories=[${category.id}]`}>
               <button className="button-primary">More</button>
             </Link>
