@@ -14,21 +14,23 @@ export default async function Home() {
   updateRelevanceScores();
   const relevantPostId = await getRelevantPostId();
 
-  const relevantPost = await prisma.posts.findFirst({
-    where: {
-      id: {
-        equals: relevantPostId,
-      },
-    },
-    include: {
-      author: true,
-      post_categories: {
-        include: {
-          categories: true,
+  const relevantPost = relevantPostId
+    ? await prisma.posts.findFirst({
+        where: {
+          id: {
+            equals: relevantPostId,
+          },
         },
-      },
-    },
-  });
+        include: {
+          author: true,
+          post_categories: {
+            include: {
+              categories: true,
+            },
+          },
+        },
+      })
+    : null;
 
   const postsByCategory = await prisma.categories.findMany({
     include: {

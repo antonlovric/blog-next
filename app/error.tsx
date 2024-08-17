@@ -28,7 +28,13 @@ const Error = ({
             Try again
           </button>
         </div>
-        {isMoreShown ? <div>{error.message}</div> : <></>}
+        {isMoreShown ? (
+          <div className="text-center font-semibold max-w-[450px]">
+            {error.message}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
