@@ -1,5 +1,6 @@
 import PostActions, { TVote } from '@/app/components/PostOverview/PostActions';
 import PostComments from '@/app/components/PostOverview/PostComments';
+import ProfileImage from '@/app/components/UI/ProfileImage';
 import {
   incrementPostLikeCount,
   incrementPostVisitCount,
@@ -115,11 +116,9 @@ const Post = async ({ params }: IPostPage) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Link href={`/profile/${post?.author.id}`}>
-              <img
-                src={post?.author.profile_image || ''}
-                alt="Author profile image"
-                className="w-[60px] h-[60px] object-cover rounded-full"
-              />
+              <div className="w-[60px] h-[60px]">
+                <ProfileImage imagePath={post?.author.profile_image} />
+              </div>
             </Link>
             <div className="flex flex-col justify-between h-full">
               <Link href={`/profile/${post?.author.id}`}>

@@ -2,6 +2,7 @@ import { Prisma } from '@prisma/client';
 import React from 'react';
 import { formatDate } from '../helpers/global';
 import DOMPurify from 'isomorphic-dompurify';
+import ProfileImage from './UI/ProfileImage';
 
 interface IFeaturedPost {
   post: Prisma.postsGetPayload<{
@@ -50,13 +51,10 @@ const FeaturedPost = (props: IFeaturedPost) => {
         </div>
         <div className="flex font-extralight text-lg justify-between items-center">
           <div className="flex items-center justify-between gap-2">
-            <img
-              src={props.post.author.profile_image || ''}
-              width={50}
-              height={50}
-              alt="Author profile image"
-              className="rounded-full w-[40px] h-[40px] object-cover"
-            />
+            <div className="h-[40px] w-[40px]">
+              <ProfileImage imagePath={props.post.author.profile_image} />
+            </div>
+
             <p>
               by {props.post.author.first_name} {props.post.author.last_name}
             </p>

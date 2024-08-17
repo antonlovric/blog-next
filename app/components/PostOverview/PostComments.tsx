@@ -5,6 +5,7 @@ import { comments } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import React, { useTransition } from 'react';
 import LoadingWrapper from '../UI/LoadingWrapper';
+import ProfileImage from '../UI/ProfileImage';
 
 interface ICommentsList extends comments {
   users: {
@@ -57,11 +58,9 @@ const PostComments = (props: IPostComments) => {
         <div className="flex flex-col gap-4">
           {props?.comments.map((comment) => (
             <div key={comment.id} className="mb-2 flex gap-2">
-              <img
-                className="w-[20px] h-[20px] rounded-full"
-                src={comment.users?.profile_image || ''}
-                alt=""
-              />
+              <div className="w-[20px] h-[20px]">
+                <ProfileImage imagePath={comment.users?.profile_image} />
+              </div>
               <div>
                 <p>
                   {comment.users?.first_name} {comment.users?.last_name}

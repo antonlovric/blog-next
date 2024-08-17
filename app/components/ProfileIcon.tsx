@@ -5,6 +5,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ExitIcon, FilePlusIcon, PersonIcon } from '@radix-ui/react-icons';
 import { useRouter } from 'next/navigation';
 import { users } from '@prisma/client';
+import ProfileImage from './UI/ProfileImage';
 
 interface IProfileIcon {
   profileImage?: string;
@@ -44,17 +45,9 @@ const ProfileIcon = ({ profileImage, logout, user }: IProfileIcon) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
-        {user?.profile_image ? (
-          <img
-            src={user?.profile_image}
-            className="rounded-full object-cover h-[40px] w-[40px] cursor-pointer"
-            alt="profile image"
-          />
-        ) : (
-          <div className="flex items-center justify-center rounded-full h-[40px] w-[40px] bg-gray-500">
-            <span className="material-symbols-outlined">person</span>
-          </div>
-        )}
+        <div className="h-[40px] w-[40px]">
+          <ProfileImage imagePath={user?.profile_image} />
+        </div>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content className="mr-5 mt-1 bg-dark-gray p-2 rounded-md">
