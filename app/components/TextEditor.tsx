@@ -30,17 +30,32 @@ const TextEditor = ({ categories, post, userId }: ITextEditor) => {
     extensions: [StarterKit, CharacterCount.configure({ limit: 100 })],
     content: post?.title || '<h1>This is the title of your article!</h1>',
     injectCSS: false,
+    editorProps: {
+      attributes: {
+        class: 'px-2 py-1',
+      },
+    },
   });
 
   const summaryEditor = useEditor({
     extensions: [StarterKit, CharacterCount.configure({ limit: 300 })],
     content: post?.summary || '<h2>Write a quick summary!</h2>',
     injectCSS: false,
+    editorProps: {
+      attributes: {
+        class: 'px-2 py-2',
+      },
+    },
   });
 
   const bodyEditor = useEditor({
     extensions: [StarterKit, CustomTiptapImage],
     content: post?.html_content || '<p>Hello World! 🌎️</p>',
+    editorProps: {
+      attributes: {
+        class: 'px-1 py-1',
+      },
+    },
   });
 
   const [selectedCategories, setSelectedCategories] = useState<number[]>(
@@ -188,7 +203,7 @@ const TextEditor = ({ categories, post, userId }: ITextEditor) => {
           />
         </div>
       )}
-      <EditorContent editor={summaryEditor} className="text-2xl" />
+      <EditorContent editor={summaryEditor} className="text-xl" />
       <BodyEditor
         editor={bodyEditor}
         updateUploadedImagesList={(key) => uploadedImageKeys.current.push(key)}

@@ -44,7 +44,7 @@ const FeaturedPost = (props: IFeaturedPost) => {
               dangerouslySetInnerHTML={{ __html: sanitizedTitle }}
             ></div>
             <div
-              className="font-light text-xl text-justify"
+              className="font-light text-xl text-justify mt-4"
               dangerouslySetInnerHTML={{ __html: sanitizedSummary }}
             ></div>
           </div>
