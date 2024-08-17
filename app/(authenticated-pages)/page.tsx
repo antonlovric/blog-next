@@ -46,11 +46,15 @@ export default async function Home() {
       },
     },
   });
+  const POST_PER_CATEGORY_COUNT = 5;
   const filteredPostCategories = postsByCategory
     .filter((category) => category.post_categories.length)
     .map((category) => ({
       ...category,
-      post_categories: category.post_categories.slice(0, 5),
+      post_categories: category.post_categories.slice(
+        0,
+        POST_PER_CATEGORY_COUNT
+      ),
     }));
 
   return (
