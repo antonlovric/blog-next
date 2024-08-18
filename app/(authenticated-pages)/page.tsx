@@ -84,15 +84,9 @@ export default async function Home() {
     },
   });
 
-  // const filteredPostCategories = postsByCategory
-  //   .filter((category) => category.post_categories.length)
-  //   .map((category) => ({
-  //     ...category,
-  //     post_categories: category.post_categories.slice(
-  //       0,
-  //       POST_PER_CATEGORY_COUNT
-  //     ),
-  //   }));
+  const filteredPostCategories = postsByCategory.filter(
+    (category) => category.post_categories.length
+  );
 
   return (
     <div className={inter.className}>
@@ -101,7 +95,7 @@ export default async function Home() {
         <span className="text-blog-blue"> one post at a time</span>
       </h1>
       <main>{relevantPost ? <FeaturedPost post={relevantPost} /> : <></>}</main>
-      {postsByCategory.map((category) => (
+      {filteredPostCategories.map((category) => (
         <section className="flex flex-col gap-2 mt-6 pb-4" key={category.id}>
           <div className="flex items-center justify-between gap-6">
             <div className="flex items-center justify-between gap-6 w-full">
