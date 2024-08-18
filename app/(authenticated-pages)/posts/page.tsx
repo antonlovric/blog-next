@@ -113,7 +113,7 @@ const Posts = async ({ searchParams }: IPostsPage) => {
           </Link>
         ))}
       </div>
-      <section className="flex items-start justify-between">
+      <section className="flex items-center justify-between">
         <Pagination
           selectedPage={activePageNumber}
           numberOfPages={numberOfPages}
