@@ -6,9 +6,34 @@ import ProfileImage from './UI/ProfileImage';
 
 interface IFeaturedPost {
   post: Prisma.postsGetPayload<{
-    include: {
-      author: true;
-      post_categories: { include: { categories: true } };
+    select: {
+      id: true;
+      cover_image: true;
+      title: true;
+      summary: true;
+      created_at: true;
+      author: {
+        select: {
+          first_name: true;
+          last_name: true;
+          id: true;
+          profile_image: true;
+        };
+      };
+      post_categories: {
+        select: {
+          categories: true;
+          posts: {
+            select: {
+              cover_image: true;
+              created_at: true;
+              id: true;
+              summary: true;
+              title: true;
+            };
+          };
+        };
+      };
     };
   }>;
 }
@@ -31,7 +56,7 @@ const FeaturedPost = (props: IFeaturedPost) => {
           <div className="flex items-center gap-3">
             {props.post.post_categories.map((category) => (
               <span
-                key={category.categories_id}
+                key={category.categories.id}
                 className="bg-blog-blue px-2 py-1 rounded-md"
               >
                 {category.categories.name}

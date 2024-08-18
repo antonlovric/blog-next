@@ -17,18 +17,27 @@ export default async function Home() {
   const relevantPost = relevantPostId
     ? await prisma.posts.findFirst({
         where: {
-          id: {
-            equals: relevantPostId,
-          },
+          id: relevantPostId,
         },
-        include: {
-          author: true,
+        select: {
+          id: true,
+          cover_image: true,
+          title: true,
+          summary: true,
+          created_at: true,
+          author: {
+            select: {
+              first_name: true,
+              last_name: true,
+              id: true,
+              profile_image: true,
+            },
+          },
           post_categories: {
-            include: {
+            select: {
               categories: true,
               posts: {
                 select: {
-                  author: true,
                   cover_image: true,
                   created_at: true,
                   id: true,
@@ -41,31 +50,49 @@ export default async function Home() {
         },
       })
     : null;
+  const POST_PER_CATEGORY_COUNT = 5;
 
   const postsByCategory = await prisma.categories.findMany({
-    include: {
+    select: {
+      id: true,
+      name: true,
       post_categories: {
-        include: {
-          posts: true,
+        select: {
+          posts: {
+            select: {
+              cover_image: true,
+              title: true,
+              summary: true,
+              id: true,
+            },
+          },
+          categories: {
+            select: {
+              id: true,
+            },
+          },
         },
+        take: POST_PER_CATEGORY_COUNT,
         orderBy: {
           posts: {
-            created_at: { sort: 'desc' },
+            created_at: {
+              sort: 'desc',
+            },
           },
         },
       },
     },
   });
-  const POST_PER_CATEGORY_COUNT = 5;
-  const filteredPostCategories = postsByCategory
-    .filter((category) => category.post_categories.length)
-    .map((category) => ({
-      ...category,
-      post_categories: category.post_categories.slice(
-        0,
-        POST_PER_CATEGORY_COUNT
-      ),
-    }));
+
+  // const filteredPostCategories = postsByCategory
+  //   .filter((category) => category.post_categories.length)
+  //   .map((category) => ({
+  //     ...category,
+  //     post_categories: category.post_categories.slice(
+  //       0,
+  //       POST_PER_CATEGORY_COUNT
+  //     ),
+  //   }));
 
   return (
     <div className={inter.className}>
@@ -74,7 +101,7 @@ export default async function Home() {
         <span className="text-blog-blue"> one post at a time</span>
       </h1>
       <main>{relevantPost ? <FeaturedPost post={relevantPost} /> : <></>}</main>
-      {filteredPostCategories.map((category) => (
+      {postsByCategory.map((category) => (
         <section className="flex flex-col gap-2 mt-6 pb-4" key={category.id}>
           <div className="flex items-center justify-between gap-6">
             <div className="flex items-center justify-between gap-6 w-full">
@@ -88,9 +115,9 @@ export default async function Home() {
           <div className="grid md:grid-cols-5 sm:grid-cols-2 grid-cols-1 gap-y-8 gap-x-6 overflow-x-scroll mt-2">
             {category.post_categories.map((post) => (
               <Link
-                href={`post/${post.posts_id}`}
+                href={`post/${post.posts.id}`}
                 className="bg-dark-gray  rounded-md p-2 cursor-pointer h-full flex flex-col justify-between relative"
-                key={`${post.categories_id}-${post.posts_id}`}
+                key={`${post.categories.id}-${post.posts.id}`}
               >
                 <img
                   src={post.posts.cover_image || ''}
