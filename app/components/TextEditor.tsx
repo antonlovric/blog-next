@@ -32,7 +32,7 @@ const TextEditor = ({ categories, post, userId }: ITextEditor) => {
     injectCSS: false,
     editorProps: {
       attributes: {
-        class: 'px-1 py-1',
+        class: 'px-2 py-2',
       },
     },
   });
@@ -43,7 +43,7 @@ const TextEditor = ({ categories, post, userId }: ITextEditor) => {
     injectCSS: false,
     editorProps: {
       attributes: {
-        class: 'px-1 py-1',
+        class: 'px-2 py-2 border border-light-gray border-solid rounded-md',
       },
     },
   });
@@ -53,7 +53,7 @@ const TextEditor = ({ categories, post, userId }: ITextEditor) => {
     content: post?.html_content || '<p>Hello World! 🌎️</p>',
     editorProps: {
       attributes: {
-        class: 'px-1 py-1',
+        class: 'px-2 py-2 border border-light-gray border-solid rounded-md',
       },
     },
   });

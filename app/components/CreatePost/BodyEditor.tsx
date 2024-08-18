@@ -84,7 +84,7 @@ const BodyEditor = (props: IBodyEditor) => {
         <DropdownMenu.Root>
           <DropdownMenu.Trigger
             onClick={() => setIsFontDropdownVisible(!isFontDropdownVisible)}
-            className="relative bg-dark-gray px-2 py-2 border border-light-gray rounded-md"
+            className="relative bg-dark-gray px-2 py-1 border border-light-gray rounded-md"
           >
             <span>{activeFontType}</span>
           </DropdownMenu.Trigger>
@@ -152,7 +152,10 @@ const BodyEditor = (props: IBodyEditor) => {
             isActive={props.editor?.isActive('codeBlock')}
             iconName="code"
           />
-          <label htmlFor="image-input" className="cursor-pointer">
+          <label
+            htmlFor="image-input"
+            className="cursor-pointer flex items-center justify-center"
+          >
             <span className="material-symbols-outlined">image</span>
           </label>
           <input
@@ -167,7 +170,7 @@ const BodyEditor = (props: IBodyEditor) => {
       </div>
       <EditorContent
         editor={props.editor}
-        className="text-md leading-6 border border-light-gray border-solid rounded-md p-2 [&_img]:text-center"
+        className="text-md [&_img]:text-center"
       />
     </div>
   );

@@ -16,8 +16,8 @@ const TextEditorButton = (props: ITextEditorButton) => {
       onClick={props.onClick}
       className={
         props?.isActive
-          ? 'text-secondary-blue transition-colors'
-          : 'text-white transition-colors'
+          ? 'text-secondary-blue transition-colors '
+          : 'text-white transition-colors flex items-center justify-center'
       }
     >
       <span className="material-symbols-outlined">{props.iconName}</span>
