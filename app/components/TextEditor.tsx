@@ -190,7 +190,7 @@ const TextEditor = ({ categories, post, userId }: ITextEditor) => {
       ) : (
         <div className="w-full flex justify-center relative py-5">
           <label className="pointer" htmlFor="cover-image">
-            <div className="bg-blog-blue text-dark-gray w-[400px] h-[250px] flex items-center justify-center cursor-pointer">
+            <div className="bg-blog-blue text-dark-gray w-[400px] h-[250px] flex items-center justify-center cursor-pointer rounded-md">
               <span className="material-symbols-outlined !text-8xl">image</span>
             </div>
           </label>
