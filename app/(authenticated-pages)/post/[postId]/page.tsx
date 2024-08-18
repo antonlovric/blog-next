@@ -110,7 +110,7 @@ const Post = async ({ params }: IPostPage) => {
       ></div>
       <div
         dangerouslySetInnerHTML={{ __html: sanitizedSummary }}
-        className="text-xl mb-5"
+        className="text-xl mb-5 text-center"
       ></div>
       <section className="flex flex-col mb-5 w-3/4 mx-auto">
         <div className="flex items-center justify-between">
