@@ -25,7 +25,7 @@ const Posts = async ({ searchParams }: IPostsPage) => {
   );
   const activePageNumber: number = parseInt(searchParams?.activePage || '1');
 
-  const pageSize: number = parseInt(searchParams?.pageSize || '6');
+  const pageSize: number = parseInt(searchParams?.pageSize || '5');
   const whereClause: any = {};
   if (parsedSearchQuery) {
     whereClause['OR'] = [
@@ -63,11 +63,27 @@ const Posts = async ({ searchParams }: IPostsPage) => {
   }
 
   const posts = await prisma.posts.findMany({
-    include: {
-      author: true,
+    select: {
+      id: true,
+      cover_image: true,
+      title: true,
+      summary: true,
+      created_at: true,
+      author: {
+        select: {
+          id: true,
+          first_name: true,
+          last_name: true,
+        },
+      },
       post_categories: {
-        include: {
-          categories: true,
+        select: {
+          categories: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
         },
       },
     },
