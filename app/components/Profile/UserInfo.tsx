@@ -108,10 +108,14 @@ const UserInfo = (props: IUserInfo) => {
         )}
       </div>
       {props.userProfile && <ProfileDetails profile={props.userProfile} />}
-      <div className="flex flex-col gap-3 w-full">
-        <div className="border-b border-b-light-gray pb-1">About me</div>
-        <div>{props.userProfile.bio}</div>
-      </div>
+      {props.userProfile.bio ? (
+        <div className="flex flex-col gap-3 w-full">
+          <div className="border-b border-b-light-gray pb-1">About me</div>
+          <div>{props.userProfile.bio}</div>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
