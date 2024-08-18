@@ -16,7 +16,7 @@ const Tooltip = (props: ITooltip) => {
   }
   return (
     <span
-      className="relative"
+      className="relative flex items-center justify-center"
       onMouseEnter={showTooltip}
       onMouseLeave={hideTooltip}
     >

@@ -12,9 +12,22 @@ import { useRouter } from 'next/navigation';
 
 interface IProfileDetails {
   profile: Prisma.usersGetPayload<{
-    include: {
+    select: {
+      id: true;
+      bio: true;
+      email: true;
+      first_name: true;
+      last_name: true;
+      location: true;
+      phone_number: true;
+      profile_image: true;
       posts: {
-        include: { post_categories: { include: { categories: true } } };
+        select: {
+          id: true;
+          cover_image: true;
+          summary: true;
+          title: true;
+        };
       };
     };
   }>;

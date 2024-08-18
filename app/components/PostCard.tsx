@@ -1,6 +1,6 @@
 'use client';
 
-import { categories, posts, users } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import React, { useTransition } from 'react';
@@ -10,17 +10,33 @@ import { deletePost } from '../actions/posts';
 import { useRouter } from 'next/navigation';
 import LoadingWrapper from './UI/LoadingWrapper';
 
-interface IPostCategories {
-  categories: categories;
-}
-
-interface IExtendedPost extends posts {
-  author?: users;
-  post_categories: IPostCategories[];
-}
-
 interface IPostCard {
-  post: IExtendedPost;
+  post: Prisma.postsGetPayload<{
+    select: {
+      id: true;
+      cover_image: true;
+      title: true;
+      summary: true;
+      created_at: true;
+      author: {
+        select: {
+          id: true;
+          first_name: true;
+          last_name: true;
+        };
+      };
+      post_categories: {
+        select: {
+          categories: {
+            select: {
+              id: true;
+              name: true;
+            };
+          };
+        };
+      };
+    };
+  }>;
   isEditable?: boolean;
 }
 
