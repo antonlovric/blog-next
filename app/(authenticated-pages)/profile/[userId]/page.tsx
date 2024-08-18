@@ -18,6 +18,12 @@ const UserProfile = async ({ params }: IProfilePage) => {
     include: {
       posts: {
         include: { post_categories: { include: { categories: true } } },
+        select: {
+          id: true,
+          cover_image: true,
+          summary: true,
+          title: true,
+        },
       },
     },
   });

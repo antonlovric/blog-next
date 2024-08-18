@@ -26,6 +26,16 @@ export default async function Home() {
           post_categories: {
             include: {
               categories: true,
+              posts: {
+                select: {
+                  author: true,
+                  cover_image: true,
+                  created_at: true,
+                  id: true,
+                  summary: true,
+                  title: true,
+                },
+              },
             },
           },
         },
