@@ -17,12 +17,20 @@ const UserProfile = async ({ params }: IProfilePage) => {
     where: { id: { equals: parseInt(params.userId || '') } },
     include: {
       posts: {
-        include: { post_categories: { include: { categories: true } } },
-        select: {
-          id: true,
-          cover_image: true,
-          summary: true,
-          title: true,
+        include: {
+          post_categories: {
+            include: {
+              categories: true,
+              posts: {
+                select: {
+                  id: true,
+                  cover_image: true,
+                  summary: true,
+                  title: true,
+                },
+              },
+            },
+          },
         },
       },
     },
