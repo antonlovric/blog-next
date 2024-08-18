@@ -3,7 +3,6 @@ import * as Dialog from '@radix-ui/react-dialog';
 import Tooltip from '../UI/Tooltip';
 import React, { useState } from 'react';
 import EditableProfileIcon from '../EditableProfileIcon';
-import ProfileBioEditor from '../ProfileBioEditor';
 import ProfileDetails from '../ProfileDetails';
 import { Prisma } from '@prisma/client';
 import { saveProfileImage } from '@/app/actions/users';
