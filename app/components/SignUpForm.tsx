@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { handleSignUp, sendConfirmationEmail } from '../actions/users';
 
 export interface IUserSignUpForm {
   firstName: string;
@@ -8,11 +9,7 @@ export interface IUserSignUpForm {
   password: string;
 }
 
-interface ISignUpForm {
-  handleSignUp: (user: IUserSignUpForm) => Promise<void>;
-}
-
-const SignUpForm = ({ handleSignUp }: ISignUpForm) => {
+const SignUpForm = () => {
   const [formValues, setFormValues] = useState<IUserSignUpForm>({
     email: '',
     firstName: '',
@@ -39,7 +36,8 @@ const SignUpForm = ({ handleSignUp }: ISignUpForm) => {
   async function submitUser() {
     try {
       setIsLoading(true);
-      await handleSignUp(formValues);
+      const createdUser = await handleSignUp(formValues);
+      await sendConfirmationEmail(formValues.email, createdUser.id);
     } catch (error) {
       console.error(error);
     } finally {

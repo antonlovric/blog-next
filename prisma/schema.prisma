@@ -59,6 +59,7 @@ model users {
   location      String?
   phone_number  String?
   bio           String?
+  confirmed_at  DateTime?    @db.Date
   comments      comments[]
   post_votes    post_votes[]
   posts         posts[]      @relation("posts_users_idTousers")
