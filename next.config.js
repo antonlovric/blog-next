@@ -7,9 +7,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'https://tech-tales.s3.eu-central-1.amazonaws.com',
+        hostname: 'tech-tales.s3.eu-central-1.amazonaws.com',
         port: '',
-        pathname: '/',
+        pathname: '/*/**',
       },
     ],
   },
