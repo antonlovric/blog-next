@@ -4,7 +4,14 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['https://tech-tales.s3.eu-central-1.amazonaws.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'https://tech-tales.s3.eu-central-1.amazonaws.com',
+        port: '',
+        pathname: '/*/**',
+      },
+    ],
   },
   async headers() {
     return [
