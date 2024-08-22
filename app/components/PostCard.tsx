@@ -9,6 +9,7 @@ import Tooltip from './UI/Tooltip';
 import { deletePost } from '../actions/posts';
 import { useRouter } from 'next/navigation';
 import LoadingWrapper from './UI/LoadingWrapper';
+import Image from 'next/image';
 
 interface IPostCard {
   post: Prisma.postsGetPayload<{
@@ -107,10 +108,12 @@ const PostCard = ({ post, isEditable }: IPostCard) => {
       )}
       <div>
         <div className="w-full relative">
-          <img
+          <Image
             src={post.cover_image || ''}
             alt={post.title + ' cover image'}
             className="block rounded-md h-[250px] w-full object-cover"
+            height={250}
+            layout="fill"
           />
           <div className="absolute flex items-center gap-2 bottom-2 right-2">
             {post.post_categories.map((postCategory) => (

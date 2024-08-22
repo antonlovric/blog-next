@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 const Error = ({
@@ -15,7 +16,13 @@ const Error = ({
   return (
     <div className="w-screen h-screen grid place-items-center bg-dark-gray">
       <div className="flex flex-col gap-3">
-        <img src="/error.svg" alt="no" className="h-[500px] w-[500px]" />
+        <Image
+          src="/error.svg"
+          height={500}
+          width={500}
+          alt="error image"
+          className="h-[500px] w-[500px]"
+        />
         <p className="text-center">We have unfortunately had an error! </p>
         <div className="flex items-center justify-center gap-4">
           <button

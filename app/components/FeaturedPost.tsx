@@ -3,6 +3,7 @@ import React from 'react';
 import { formatDate } from '../helpers/global';
 import DOMPurify from 'isomorphic-dompurify';
 import ProfileImage from './UI/ProfileImage';
+import Image from 'next/image';
 
 interface IFeaturedPost {
   post: Prisma.postsGetPayload<{
@@ -44,7 +45,7 @@ const FeaturedPost = (props: IFeaturedPost) => {
 
   return (
     <article className="grid grid-cols-2 gap-x-8 w-5/6 mx-auto mt-10">
-      <img
+      <Image
         alt="Blog image"
         src={props.post.cover_image || ''}
         height={400}

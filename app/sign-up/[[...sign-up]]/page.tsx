@@ -33,7 +33,12 @@ const SignUpPage = () => {
         />
       </div>
       <div className="flex flex-col w-1/3 gap-4 items-center justify-center col-span-2 mx-auto my-auto bg-dark-gray h-max p-6 rounded-lg">
-        <img alt="" src={'/logo-no-background.svg'} className="w-full mb-4" />
+        <Image
+          src={'/logo-no-background.svg'}
+          alt=""
+          className="w-full mb-4"
+          height={50}
+        />
         <SignUpForm />
       </div>
     </main>

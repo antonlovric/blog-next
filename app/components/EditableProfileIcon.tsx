@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { uploadImage } from '../helpers/s3';
+import Image from 'next/image';
 
 interface IEditableProfileIcon {
   initialProfileIconLink: string;
@@ -53,7 +54,9 @@ const EditableProfileIcon = ({
         htmlFor="profile-image"
         className="relative before:absolute before:w-full before:h-full before:rounded-full top-0 left-0 before:hidden before:opacity-50 before:bg-white hover:before:flex mb-2 after:absolute after:top-0 after:left-0 after:hidden"
       >
-        <img
+        <Image
+          height={150}
+          width={150}
           className={`w-[150px] h-[150px] rounded-full object-cover  ${
             canEdit && 'cursor-pointer'
           } `}

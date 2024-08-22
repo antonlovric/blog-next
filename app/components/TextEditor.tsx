@@ -10,6 +10,7 @@ import { Image as CustomTiptapImage } from '@/app/helpers/tiptap';
 import { uploadImage } from '../helpers/s3';
 import { createPost, editPost } from '../actions/posts';
 import { deleteImages } from '../actions/images';
+import Image from 'next/image';
 
 interface ITextEditor {
   categories?: categories[];
@@ -178,10 +179,10 @@ const TextEditor = ({ categories, post, userId }: ITextEditor) => {
             >
               <span className="material-symbols-outlined">close</span>
             </button>
-            <img
+            <Image
               src={coverImage}
               alt=""
-              width={100}
+              width={400}
               height={200}
               className="w-[400px] rounded-md"
             />

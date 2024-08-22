@@ -5,6 +5,7 @@ import { getRelevantPostId, updateRelevanceScores } from '../helpers/analytics';
 import { prisma } from '../helpers/api';
 import { getSanitizedHtml } from '../helpers/global';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Tech Tales | Home',
@@ -113,10 +114,11 @@ export default async function Home() {
                 className="bg-dark-gray  rounded-md p-2 cursor-pointer h-full flex flex-col justify-between relative"
                 key={`${post.categories.id}-${post.posts.id}`}
               >
-                <img
+                <Image
                   src={post.posts.cover_image || ''}
                   alt=""
                   className="block rounded-md h-[250px] w-full object-cover"
+                  height={250}
                 />
                 <span
                   dangerouslySetInnerHTML={{
