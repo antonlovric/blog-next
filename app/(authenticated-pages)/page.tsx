@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import FeaturedPost from '../components/FeaturedPost';
 import { inter } from './layout';
-import { getRelevantPostId, updateRelevanceScores } from '../helpers/analytics';
+import { updateRelevanceScores } from '../helpers/analytics';
 import { prisma } from '../helpers/api';
 import { getSanitizedHtml } from '../helpers/global';
 import Link from 'next/link';
@@ -13,44 +13,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   updateRelevanceScores();
-  const relevantPostId = await getRelevantPostId();
 
-  const relevantPost = relevantPostId
-    ? await prisma.posts.findFirst({
-        where: {
-          id: relevantPostId,
-        },
-        select: {
-          id: true,
-          cover_image: true,
-          title: true,
-          summary: true,
-          created_at: true,
-          author: {
-            select: {
-              first_name: true,
-              last_name: true,
-              id: true,
-              profile_image: true,
-            },
-          },
-          post_categories: {
-            select: {
-              categories: true,
-              posts: {
-                select: {
-                  cover_image: true,
-                  created_at: true,
-                  id: true,
-                  summary: true,
-                  title: true,
-                },
-              },
-            },
-          },
-        },
-      })
-    : null;
   const POST_PER_CATEGORY_COUNT = 5;
 
   const postsByCategory = await prisma.categories.findMany({
@@ -95,7 +58,9 @@ export default async function Home() {
         Unlocking tech&apos;s untold stories
         <span className="text-blog-blue"> one post at a time</span>
       </h1>
-      <main>{relevantPost ? <FeaturedPost post={relevantPost} /> : <></>}</main>
+      <main>
+        <FeaturedPost />
+      </main>
       {filteredPostCategories.map((category) => (
         <section className="flex flex-col gap-2 mt-6 pb-4" key={category.id}>
           <div className="flex items-center justify-between gap-6">
