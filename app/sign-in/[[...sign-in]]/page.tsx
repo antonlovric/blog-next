@@ -26,8 +26,10 @@ const SignInPage = async () => {
         <Image
           alt="People standing in a room with computers"
           src={'/auth-image.jpg'}
-          className="h-full"
-          width={100}
+          height={0}
+          width={0}
+          layout="fill"
+          objectFit="cover"
         />
       </div>
       <div className="flex flex-col w-1/3 gap-4 items-center justify-center col-span-2 mx-auto my-auto bg-dark-gray h-max p-6 rounded-lg">
@@ -36,6 +38,7 @@ const SignInPage = async () => {
           src={'/logo-no-background.svg'}
           className="w-full mb-4"
           height={50}
+          width={300}
         />
         <SignInForm />
       </div>

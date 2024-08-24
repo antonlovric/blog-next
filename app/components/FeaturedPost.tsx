@@ -48,8 +48,8 @@ const FeaturedPost = (props: IFeaturedPost) => {
       <Image
         alt="Blog image"
         src={props.post.cover_image || ''}
-        height={400}
-        width={650}
+        height={500}
+        width={750}
         className="border-2 border-blog-blue rounded-md h-[400px] w-[650px] object-cover"
       />
       <div className="flex flex-col justify-between">

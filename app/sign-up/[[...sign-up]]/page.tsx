@@ -38,6 +38,7 @@ const SignUpPage = () => {
           alt=""
           className="w-full mb-4"
           height={50}
+          width={300}
         />
         <SignUpForm />
       </div>

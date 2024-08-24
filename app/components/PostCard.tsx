@@ -113,7 +113,7 @@ const PostCard = ({ post, isEditable }: IPostCard) => {
             alt={post.title + ' cover image'}
             className="block rounded-md h-[250px] w-full object-cover"
             height={250}
-            layout="fill"
+            width={400}
           />
           <div className="absolute flex items-center gap-2 bottom-2 right-2">
             {post.post_categories.map((postCategory) => (

@@ -118,7 +118,8 @@ export default async function Home() {
                   src={post.posts.cover_image || ''}
                   alt=""
                   className="block rounded-md h-[250px] w-full object-cover"
-                  height={250}
+                  height={350}
+                  width={600}
                 />
                 <span
                   dangerouslySetInnerHTML={{
