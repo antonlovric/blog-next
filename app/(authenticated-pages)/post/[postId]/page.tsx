@@ -146,7 +146,7 @@ const Post = async ({ params }: IPostPage) => {
         </div>
         <Image
           height={500}
-          width={1200}
+          width={800}
           src={post?.cover_image || ''}
           alt="Post cover image"
           className="my-2"
