@@ -150,7 +150,6 @@ const Post = async ({ params }: IPostPage) => {
           src={post?.cover_image || ''}
           alt="Post cover image"
           className="my-2"
-          rel="preload"
           priority={true}
         />
         <div className="flex items-center gap-4">
