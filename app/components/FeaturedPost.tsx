@@ -5,6 +5,7 @@ import ProfileImage from './UI/ProfileImage';
 import Image from 'next/image';
 import { getRelevantPostId } from '../helpers/analytics';
 import { prisma } from '../helpers/api';
+import Link from 'next/link';
 
 const FeaturedPost = async () => {
   const relevantPostId = await getRelevantPostId();
@@ -50,7 +51,10 @@ const FeaturedPost = async () => {
   const sanitizedSummary = DOMPurify.sanitize(post.summary || '');
 
   return (
-    <article className="grid grid-cols-2 gap-x-8 w-5/6 mx-auto mt-10">
+    <Link
+      className="grid grid-cols-2 gap-x-8 w-5/6 mx-auto mt-10"
+      href={`/post/${post.id}`}
+    >
       <Image
         alt="Blog image"
         src={post.cover_image || ''}
@@ -94,7 +98,7 @@ const FeaturedPost = async () => {
           <p> {formatDate(post.created_at)}</p>
         </div>
       </div>
-    </article>
+    </Link>
   );
 };
 
