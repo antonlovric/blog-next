@@ -3,21 +3,17 @@
 @tailwind utilities;
 
 h1 {
-  line-height: 2rem; /* 32px */
   font-weight: 600;
 }
 h2 {
-  line-height: 1.75rem; /* 28px */
   font-weight: 500;
 }
 h3 {
   font-size: 1.125rem; /* 18px */
-  line-height: 1.75rem; /* 28px */
   font-weight: 500;
 }
 p {
   font-size: 1rem; /* 16px */
-  line-height: 1.5rem; /* 24px */
   font-weight: 400;
 }
 

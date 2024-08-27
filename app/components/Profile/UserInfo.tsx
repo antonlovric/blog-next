@@ -42,8 +42,6 @@ interface IUserInfo {
 const UserInfo = (props: IUserInfo) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   function closeModal() {
-    console.log('CLOSING');
-
     setIsModalOpen(false);
   }
   function handleClick() {

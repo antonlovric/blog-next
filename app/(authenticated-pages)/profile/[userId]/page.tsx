@@ -55,19 +55,23 @@ const UserProfile = async ({ params }: IProfilePage) => {
             <></>
           )}
         </section>
-        <section>
-          <div className="flex items-center justify-between gap-4 mb-3">
-            <p className="whitespace-nowrap">Latest posts</p>
-            <div className="w-full bg-blog-blue h-[1px]"></div>
-          </div>
-          <article className="grid grid-cols-auto-fill-350 autofill:250 gap-y-8 gap-x-6">
-            {profile?.posts.map((post) => (
-              <Link key={post.id} href={`/post/${post.id}`}>
-                <PostCard isEditable={canEdit} post={post} />
-              </Link>
-            ))}
-          </article>
-        </section>
+        {profile?.posts?.length ? (
+          <section>
+            <div className="flex items-center justify-between gap-4 mb-3">
+              <p className="whitespace-nowrap">Latest posts</p>
+              <div className="w-full bg-blog-blue h-[1px]"></div>
+            </div>
+            <article className="grid grid-cols-auto-fill-350 autofill:250 gap-y-8 gap-x-6">
+              {profile?.posts.map((post) => (
+                <Link key={post.id} href={`/post/${post.id}`}>
+                  <PostCard isEditable={canEdit} post={post} />
+                </Link>
+              ))}
+            </article>
+          </section>
+        ) : (
+          <></>
+        )}
       </main>
     </div>
   );
