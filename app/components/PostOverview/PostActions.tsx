@@ -55,6 +55,10 @@ const PostActions = (props: IPostActions) => {
     setTransition(refresh);
   }
 
+  async function copyShareLink() {
+    return await navigator.clipboard.writeText(window.location.href);
+  }
+
   return (
     <div className="flex items-center gap-2 ">
       <div className="rounded-full flex items-center gap-2 border border-light-gray">
@@ -94,14 +98,9 @@ const PostActions = (props: IPostActions) => {
           <span>{props.post?.commentCount || 0}</span>
         </button>
       </Tooltip>
-      <Tooltip tooltipText="Share">
-        <button>
+      <Tooltip tooltipText="Copy share link">
+        <button onClick={copyShareLink}>
           <span className="material-symbols-outlined">share</span>
-        </button>
-      </Tooltip>
-      <Tooltip tooltipText="Report">
-        <button>
-          <span className="material-symbols-outlined">report</span>
         </button>
       </Tooltip>
     </div>
